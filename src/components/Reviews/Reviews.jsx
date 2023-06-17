@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovies } from 'services/api';
-import ListReviews from 'components/ListReviews';
+
+// import { ListActors, Actor } from './ListReviews.styled';
 
 function Reviews() {
   const [reviews, setReviews] = useState({});
@@ -16,7 +17,18 @@ function Reviews() {
   }, [movieId]);
 
   return (
-    <main>{reviews?.results && <ListReviews reviews={reviews.results} />}</main>
+    <>
+      {reviews?.results && (
+        <ul>
+          {reviews.results.map(review => (
+            <li key={review.id}>
+              <h2>{`${review.author}`}</h2>
+              <p>{`${review.content}`}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 

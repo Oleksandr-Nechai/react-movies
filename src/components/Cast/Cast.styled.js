@@ -7,7 +7,9 @@ export const ListActors = styled.ul`
 `;
 
 export const Actor = styled.li`
-  flex-basis: calc((100% - 72px) / 7);
+  flex-basis: calc(
+    (100% - 6 * ${props => props.theme.spacings.gapGallery}) / 7
+  );
   box-shadow: ${props => props.theme.shadow.mainShadow};
 `;
 

@@ -1,11 +1,12 @@
 export const theme = {
   colors: {
-    primaryColor: 'rgb(0,0,255)',
+    primaryColor: '#0000FF',
     activeColor: '#6EC531',
     mainWhite: '#FFF',
+    mainBlack: '#000',
   },
   spacings: {
-    gapGallery: '12px',
+    gapGallery: '18px',
   },
   shadow: {
     mainShadow:

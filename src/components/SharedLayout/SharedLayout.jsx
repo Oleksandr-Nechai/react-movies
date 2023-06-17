@@ -16,7 +16,9 @@ function SharedLayout() {
           </ListPages>
         </nav>
       </header>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 }

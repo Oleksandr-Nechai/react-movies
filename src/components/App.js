@@ -1,10 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
-import SharedLayout from 'components/SharedLayout';
-import MovieDetails from 'pages/MovieDetails';
+
 import Home from 'pages/Home';
 import Movies from 'pages/Movies';
-import Cast from 'pages/Cast';
-import Reviews from 'pages/Reviews';
+import MovieDetails from 'pages/MovieDetails';
+import NotFound from 'pages/NotFound/NotFound';
+
+import SharedLayout from 'components/SharedLayout';
+import Cast from 'components/Cast';
+import Reviews from 'components/Reviews';
 
 function App() {
   return (
@@ -17,6 +20,7 @@ function App() {
           <Route path="reviews" element={<Reviews />} />
         </Route>
       </Route>
+      <Route path="*" element={<NotFound />} />;
     </Routes>
   );
 }

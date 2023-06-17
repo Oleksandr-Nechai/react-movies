@@ -1,9 +1,9 @@
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 import { FcSearch } from 'react-icons/fc';
-// import PropTypes from 'prop-types';
 
-// import { validationRequest } from 'services/notifications';
+import { validationRequest } from 'services/notifications';
 
 import {
   FormStyled,
@@ -12,7 +12,7 @@ import {
   ButtonStyled,
 } from './Searchbar.styled.js';
 
-function Searchbar({ onSubmitForm, visible = false }) {
+function Searchbar({ onSubmitForm }) {
   const handleFormSubmit = ({ nameFilm }, { resetForm }) => {
     if (!nameFilm.trim()) {
       return;
@@ -43,18 +43,21 @@ function Searchbar({ onSubmitForm, visible = false }) {
         <FormStyled>
           <Container>
             <label>
-              <Input type="text" name="nameFilm" placeholder="Batman" />
+              <Input
+                type="text"
+                name="nameFilm"
+                placeholder="Batman"
+              />
             </label>
 
-            <ButtonStyled
-              type="submit"
-              disabled={visible}
-              aria-label="find film"
-            >
+            <ButtonStyled type="submit" aria-label="find film">
               <FcSearch />
             </ButtonStyled>
           </Container>
-          <ErrorMessage name="nameFilm" render={msg => <p>msg</p>} />
+          <ErrorMessage
+            name="nameFilm"
+            render={msg => validationRequest(msg)}
+          />
         </FormStyled>
       </Formik>
     </>
@@ -63,7 +66,6 @@ function Searchbar({ onSubmitForm, visible = false }) {
 
 export default Searchbar;
 
-// Searchbar.propTypes = {
-//   onSubmitForm: PropTypes.func.isRequired,
-//   visible: PropTypes.bool.isRequired,
-// };
+Searchbar.propTypes = {
+  onSubmitForm: PropTypes.func.isRequired,
+};

@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { IMAGE_BASE_URL } from 'services/api';
+import defaultImage from 'images/no_poster.jpg';
 import { Poster } from './Film.styled';
 import { useRef } from 'react';
 
@@ -8,12 +9,22 @@ function Film({ movie }) {
 
   const x = location.state?.from ?? '/';
   const y = useRef(x);
-
+  // console.log(movie);
   return (
     <>
       <Link to={y.current}>button back</Link>
-      <Poster src={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} />
-      <h1>{`${movie.title} (${movie?.release_date?.slice(0, 4)})`}</h1>
+      <Poster
+        src={
+          movie.poster_path
+            ? `${IMAGE_BASE_URL}${movie.poster_path}`
+            : defaultImage
+        }
+        alt={movie.title}
+      />
+      <h1>{`${movie.title} (${movie?.release_date?.slice(
+        0,
+        4
+      )})`}</h1>
       <p>{`${Math.round(movie.vote_average * 10)}%`}</p>
       <h2>Overview:</h2>
       <p>{movie.overview}</p>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getMovies } from 'services/api';
-import TrendingMoviesList from 'components/TrendingMoviesList';
+import MoviesList from 'components/MoviesList';
 
 function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -14,11 +14,7 @@ function Home() {
   }, []);
 
   return (
-    trendingMovies.length && (
-      <main>
-        <TrendingMoviesList trendingMovies={trendingMovies} />
-      </main>
-    )
+    trendingMovies.length && <MoviesList movies={trendingMovies} />
   );
 }
 

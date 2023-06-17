@@ -2,9 +2,6 @@ import styled from 'styled-components';
 import { Form, Field } from 'formik';
 
 export const FormStyled = styled(Form)`
-  top: 0;
-  left: 0;
-  z-index: 1100;
   display: flex;
   justify-content: center;
   width: 100%;

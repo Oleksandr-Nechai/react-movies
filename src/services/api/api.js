@@ -14,7 +14,7 @@ const BASE_PARAMS = {
   },
 };
 
-export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w200/';
+export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w300/';
 
 export async function getMovies(action, id = null, params = {}) {
   const searchParams = structuredClone(BASE_PARAMS);
