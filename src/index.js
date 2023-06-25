@@ -5,8 +5,8 @@ import { ThemeProvider } from 'styled-components';
 
 import App from 'components/App';
 
-import { theme } from 'constants/theme';
-import { GlobalStyle } from 'constants/globalStyle';
+import { theme } from 'styles/theme';
+import { GlobalStyle } from 'styles/globalStyle';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

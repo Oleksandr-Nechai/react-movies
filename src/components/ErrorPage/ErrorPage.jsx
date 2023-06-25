@@ -1,9 +1,9 @@
-import { Wrapper, Button } from './ErrorPage.styled';
+import { Wrapper, ButtonGoHomepage } from './ErrorPage.styled';
 
 function ErrorPage() {
   return (
     <Wrapper>
-      <Button to="/">Go Back to Homepage</Button>
+      <ButtonGoHomepage to="/">Go Back to Homepage</ButtonGoHomepage>
     </Wrapper>
   );
 }

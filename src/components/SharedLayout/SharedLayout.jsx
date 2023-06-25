@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+
 import { ListPages, ListItem, Link } from './SharedLayout.styled';
 
 function SharedLayout() {

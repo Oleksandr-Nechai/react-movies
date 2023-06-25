@@ -8,7 +8,7 @@ function BadRequest({ error }) {
     <Wrapper>
       <img src={movieNotFound} alt="Movie not found.jpg" />
       <ErrorMessage>
-        {error ? error : 'Sorry, your query returned no matches.'}
+        {error ?? 'Sorry, your query returned no matches.'}
       </ErrorMessage>
     </Wrapper>
   );
@@ -17,5 +17,5 @@ function BadRequest({ error }) {
 export default BadRequest;
 
 BadRequest.propTypes = {
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
 };

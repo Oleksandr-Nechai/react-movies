@@ -29,7 +29,7 @@ function MoviesList({ movies }) {
                 <Image
                   src={
                     poster_path
-                      ? `${IMAGE_BASE_URL}${poster_path}`
+                      ? `${IMAGE_BASE_URL}w300/${poster_path}`
                       : defaultImage
                   }
                   alt={`Poster ${title}`}
@@ -37,7 +37,11 @@ function MoviesList({ movies }) {
               </Poster>
               <Title>
                 <p>{title}</p>
-                <p>{formatDate(release_date)}</p>
+                <p>
+                  {release_date
+                    ? formatDate(release_date)
+                    : '--.--.--'}
+                </p>
               </Title>
             </Link>
           </Film>
@@ -55,7 +59,7 @@ MoviesList.propTypes = {
       id: PropTypes.number.isRequired,
       poster_path: PropTypes.string,
       title: PropTypes.string.isRequired,
-      release_date: PropTypes.string.isRequired,
+      release_date: PropTypes.string,
     }).isRequired
   ).isRequired,
 };

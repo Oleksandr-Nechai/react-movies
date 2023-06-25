@@ -1,0 +1,1 @@
+export { getColorByValue } from './getColorByValue';

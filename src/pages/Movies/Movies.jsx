@@ -16,7 +16,7 @@ import BadRequest from 'components/BadRequest';
 function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [listMovies, setListMovies] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmitForm = name => {
     setSearchParams({ movie: name });
@@ -37,7 +37,7 @@ function Movies() {
           query: movieQuery,
         });
         if (!results.length) {
-          setError('');
+          setError(null);
           validationRequest();
           setListMovies([]);
           return;
