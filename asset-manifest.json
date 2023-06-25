@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/react-movies/static/js/main.79be2489.js",
+    "main.js": "/react-movies/static/js/main.3bc7e2e7.js",
     "static/media/page-not-found-wallpapers.jpg": "/react-movies/static/media/page-not-found-wallpapers.a65150f4238d916f56ca.jpg",
     "index.html": "/react-movies/index.html",
-    "main.79be2489.js.map": "/react-movies/static/js/main.79be2489.js.map"
+    "main.3bc7e2e7.js.map": "/react-movies/static/js/main.3bc7e2e7.js.map"
   },
   "entrypoints": [
-    "static/js/main.79be2489.js"
+    "static/js/main.3bc7e2e7.js"
   ]
 }
