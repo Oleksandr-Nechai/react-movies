@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import { getMovies, IMAGE_BASE_URL } from 'services/api';
 import { validationRequest } from 'services/notifications';
@@ -24,20 +25,31 @@ function Cast() {
   const { movieId } = useParams();
 
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchData() {
       try {
         setVisible(true);
-        const { cast } = await getMovies('movieCredits', movieId);
+        const { cast } = await getMovies({
+          action: 'movieCredits',
+          movieId,
+          controller: { signal: controller.signal },
+        });
         setActors([...cast]);
-      } catch ({ message }) {
-        setError(message);
-        validationRequest(message);
+      } catch (e) {
+        if (axios.isCancel(e)) {
+          return;
+        }
+        setError(e.message);
+        validationRequest(e.message);
         setActors([]);
       } finally {
         setVisible(false);
       }
     }
     fetchData();
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
 
   return (

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
 import { getMovies } from 'services/api';
 import {
@@ -30,12 +31,17 @@ function Movies() {
       return;
     }
 
+    const controller = new AbortController();
+
     async function fetchData() {
       try {
         showLoading();
-        const { results } = await getMovies('search', null, {
-          query: movieQuery,
+        const { results } = await getMovies({
+          action: 'search',
+          params: { query: movieQuery },
+          controller: { signal: controller.signal },
         });
+
         if (!results.length) {
           setError(null);
           validationRequest();
@@ -45,15 +51,21 @@ function Movies() {
 
         setListMovies(results);
         findMovies(movieQuery);
-      } catch ({ message }) {
-        setError(message);
-        validationRequest(message);
+      } catch (e) {
+        if (axios.isCancel(e)) {
+          return;
+        }
+        setError(e.message);
+        validationRequest(e.message);
         setListMovies([]);
       } finally {
         loadingRemove();
       }
     }
     fetchData();
+    return () => {
+      controller.abort();
+    };
   }, [searchParams]);
 
   return (

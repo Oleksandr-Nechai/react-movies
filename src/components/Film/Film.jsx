@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -19,10 +19,22 @@ import {
 import Section from 'components/Section';
 
 function Film({ movie }) {
+  const [isLinkEnabled, setLinkEnabled] = useState(true);
   const location = useLocation();
 
-  const backLinkHref = location.state?.from ?? '/';
-  const { current } = useRef(backLinkHref);
+  const backLinkHref = useRef(location.state?.from ?? '/');
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
+  const handleButtonClick = () => {
+    setLinkEnabled(false);
+    timeoutRef.current = setTimeout(() => {
+      setLinkEnabled(true);
+    }, 20);
+  };
 
   const {
     vote_average = 0,
@@ -55,7 +67,7 @@ function Film({ movie }) {
             alt={title}
           />
         </Poster>
-        <ButtonGoBack to={current}>Go back</ButtonGoBack>
+        <ButtonGoBack to={backLinkHref.current}>Go back</ButtonGoBack>
         <MovieInfo>
           <h1>{`${title} 
           (${release_date?.slice(0, 4) ?? '---'})`}</h1>
@@ -77,13 +89,20 @@ function Film({ movie }) {
           <li>
             <ButtonMoreInfo
               to="cast"
-              // style={{ pointerEvents: 'none' }}
+              onClick={handleButtonClick}
+              style={isLinkEnabled ? {} : { pointerEvents: 'none' }}
             >
               Cast
             </ButtonMoreInfo>
           </li>
           <li>
-            <ButtonMoreInfo to="reviews">Reviews</ButtonMoreInfo>
+            <ButtonMoreInfo
+              to="reviews"
+              onClick={handleButtonClick}
+              style={isLinkEnabled ? {} : { pointerEvents: 'none' }}
+            >
+              Reviews
+            </ButtonMoreInfo>
           </li>
         </ListLink>
       </MoreInformation>

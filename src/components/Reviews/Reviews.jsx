@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import { getMovies } from 'services/api';
 import { validationRequest } from 'services/notifications';
@@ -16,20 +17,31 @@ function Reviews() {
   const { movieId } = useParams();
 
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchData() {
       try {
         setVisible(true);
-        const { results } = await getMovies('movieReviews', movieId);
+        const { results } = await getMovies({
+          action: 'movieReviews',
+          movieId,
+          controller: { signal: controller.signal },
+        });
         setReviews([...results]);
-      } catch ({ message }) {
-        setError(message);
-        validationRequest(message);
+      } catch (e) {
+        if (axios.isCancel(e)) {
+          return;
+        }
+        setError(e.message);
+        validationRequest(e.message);
         setReviews([]);
       } finally {
         setVisible(false);
       }
     }
     fetchData();
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
 
   return (
