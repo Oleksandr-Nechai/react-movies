@@ -17,7 +17,7 @@ import Section from 'components/Section';
 
 import defaultImage from 'images/no_poster.jpg';
 
-function MoviesList({ movies }) {
+function MoviesList({ movies, name }) {
   const location = useLocation();
 
   return (
@@ -30,7 +30,12 @@ function MoviesList({ movies }) {
                 lower: true,
                 strict: true,
               })}`}
-              state={{ from: location }}
+              state={{
+                from: {
+                  location,
+                  label: name,
+                },
+              }}
             >
               <Poster>
                 <Image
@@ -69,4 +74,5 @@ MoviesList.propTypes = {
       release_date: PropTypes.string,
     }).isRequired
   ).isRequired,
+  name: PropTypes.string.isRequired,
 };

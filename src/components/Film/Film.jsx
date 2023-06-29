@@ -22,7 +22,10 @@ function Film({ movie }) {
   const [isLinkEnabled, setLinkEnabled] = useState(true);
   const location = useLocation();
 
-  const backLinkHref = useRef(location.state?.from ?? '/');
+  const backLinkHref = useRef(location.state?.from.location ?? '/');
+  const labelButtonRef = useRef(
+    location.state?.from.label ?? 'to the home page'
+  );
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ function Film({ movie }) {
     setLinkEnabled(false);
     timeoutRef.current = setTimeout(() => {
       setLinkEnabled(true);
-    }, 20);
+    }, 2000);
   };
 
   const {
@@ -45,7 +48,7 @@ function Film({ movie }) {
     overview,
     genres,
   } = movie;
-
+  console.log(movie);
   const score = Math.round(vote_average * 10);
 
   return (
@@ -67,18 +70,20 @@ function Film({ movie }) {
             alt={title}
           />
         </Poster>
-        <ButtonGoBack to={backLinkHref.current}>Go back</ButtonGoBack>
+        <ButtonGoBack
+          to={backLinkHref.current}
+        >{`Go back ${labelButtonRef.current}`}</ButtonGoBack>
         <MovieInfo>
           <h1>{`${title} 
-          (${release_date?.slice(0, 4) ?? '---'})`}</h1>
+          (${release_date?.slice(0, 4) || '---'})`}</h1>
           <p>
             User score: <Score score={score}> {score}%</Score>
           </p>
           <h2>Overview:</h2>
-          <p>{overview ?? 'No data available'}</p>
+          <p>{overview || 'No data available'}</p>
           <h2>Genres</h2>
           <p>
-            {genres?.map(genre => genre.name).join(', ') ??
+            {genres?.map(genre => genre.name).join(', ') ||
               'No data available'}
           </p>
         </MovieInfo>

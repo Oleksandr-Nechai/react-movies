@@ -51,7 +51,10 @@ function Home() {
         <h1>Trending movies today</h1>
       </Section>
       {trendingMovies?.length > 0 && (
-        <MoviesList movies={trendingMovies} />
+        <MoviesList
+          movies={trendingMovies}
+          name={`to the trending page`}
+        />
       )}
       {trendingMovies?.length === 0 && <BadRequest error={error} />}
     </>

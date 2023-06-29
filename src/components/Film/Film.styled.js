@@ -36,6 +36,8 @@ export const ButtonGoBack = styled(Button)`
   position: absolute;
   top: 20px;
   left: 20px;
+
+  max-width: 300px;
 `;
 
 export const MovieInfo = styled.div`

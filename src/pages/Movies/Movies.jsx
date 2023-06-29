@@ -18,7 +18,7 @@ function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [listMovies, setListMovies] = useState(null);
   const [error, setError] = useState(null);
-
+  const [name, setName] = useState(null);
   const onSubmitForm = name => {
     setSearchParams({ movie: name });
   };
@@ -50,6 +50,7 @@ function Movies() {
         }
 
         setListMovies(results);
+        setName(movieQuery);
         findMovies(movieQuery);
       } catch (e) {
         if (axios.isCancel(e)) {
@@ -71,7 +72,12 @@ function Movies() {
   return (
     <>
       <Searchbar onSubmitForm={onSubmitForm} />
-      {listMovies?.length > 0 && <MoviesList movies={listMovies} />}
+      {listMovies?.length > 0 && (
+        <MoviesList
+          movies={listMovies}
+          name={`to the ${name} movies`}
+        />
+      )}
       {listMovies?.length === 0 && <BadRequest error={error} />}
     </>
   );
