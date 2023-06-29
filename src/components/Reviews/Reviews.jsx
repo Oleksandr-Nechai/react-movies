@@ -14,7 +14,8 @@ function Reviews() {
   const [reviews, setReviews] = useState(null);
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState(null);
-  const { movieId } = useParams();
+  const { slug } = useParams();
+  const movieId = slug.match(/[a-zA-Z0-9]+$/)[0];
 
   useEffect(() => {
     const controller = new AbortController();

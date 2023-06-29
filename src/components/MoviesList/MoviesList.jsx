@@ -1,5 +1,6 @@
 import { useLocation, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import slugify from 'slugify';
 
 import {
   MovieGallery,
@@ -24,7 +25,13 @@ function MoviesList({ movies }) {
       <MovieGallery>
         {movies.map(({ id, poster_path, title, release_date }) => (
           <Film key={id}>
-            <Link to={`/movies/${id}`} state={{ from: location }}>
+            <Link
+              to={`/movies/${slugify(`${title} ${id}`, {
+                lower: true,
+                strict: true,
+              })}`}
+              state={{ from: location }}
+            >
               <Poster>
                 <Image
                   src={

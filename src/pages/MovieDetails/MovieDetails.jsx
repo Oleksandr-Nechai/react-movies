@@ -15,7 +15,8 @@ import BadRequest from 'components/BadRequest';
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState('');
-  const { movieId } = useParams();
+  const { slug } = useParams();
+  const movieId = slug.match(/[a-zA-Z0-9]+$/)[0];
 
   useEffect(() => {
     const controller = new AbortController();
