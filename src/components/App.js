@@ -1,13 +1,24 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Home from 'pages/Home';
-import Movies from 'pages/Movies';
-import MovieDetails from 'pages/MovieDetails';
-import NotFound from 'pages/NotFound/NotFound';
-
 import SharedLayout from 'components/SharedLayout';
-import Cast from 'components/Cast';
-import Reviews from 'components/Reviews';
+
+const Home = lazy(() => import('../pages/Home' /* webpackChunkName: "Home" */));
+const Movies = lazy(() =>
+  import('../pages/Movies' /* webpackChunkName: "Movies" */)
+);
+const MovieDetails = lazy(() =>
+  import('../pages/MovieDetails' /* webpackChunkName: "MovieDetails" */)
+);
+const NotFound = lazy(() =>
+  import('../pages/NotFound' /* webpackChunkName: "NotFound" */)
+);
+const Cast = lazy(() =>
+  import('components/Cast' /* webpackChunkName: "Cast" */)
+);
+const Reviews = lazy(() =>
+  import('components/Reviews' /* webpackChunkName: "Reviews" */)
+);
 
 function App() {
   return (

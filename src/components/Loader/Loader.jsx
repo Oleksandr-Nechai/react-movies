@@ -1,7 +1,7 @@
 import { ThreeDots } from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 
-function Loader({ visible }) {
+function Loader({ visible, gap = '0px' }) {
   return (
     <ThreeDots
       height="34"
@@ -11,6 +11,7 @@ function Loader({ visible }) {
       ariaLabel="three-dots-loading"
       wrapperStyle={{
         justifyContent: 'center',
+        margin: `${gap}`,
       }}
       visible={visible}
     />
@@ -20,5 +21,6 @@ function Loader({ visible }) {
 export default Loader;
 
 Loader.propTypes = {
-  visible: PropTypes.bool.isRequired,
+  visible: PropTypes.bool,
+  gap: PropTypes.string,
 };

@@ -1,8 +1,11 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, Suspense } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import Loader from 'components/Loader';
+
 import { IMAGE_BASE_URL } from 'services/api';
+
 import defaultImage from 'images/no_poster.jpg';
 
 import {
@@ -48,7 +51,7 @@ function Film({ movie }) {
     overview,
     genres,
   } = movie;
-  console.log(movie);
+
   const score = Math.round(vote_average * 10);
 
   return (
@@ -83,8 +86,7 @@ function Film({ movie }) {
           <p>{overview || 'No data available'}</p>
           <h2>Genres</h2>
           <p>
-            {genres?.map(genre => genre.name).join(', ') ||
-              'No data available'}
+            {genres?.map(genre => genre.name).join(', ') || 'No data available'}
           </p>
         </MovieInfo>
       </Wraper>
@@ -111,7 +113,9 @@ function Film({ movie }) {
           </li>
         </ListLink>
       </MoreInformation>
-      <Outlet />
+      <Suspense fallback={<Loader gap={'100px'} />}>
+        <Outlet />
+      </Suspense>
     </Section>
   );
 }
