@@ -8,13 +8,7 @@ import { validationRequest } from 'services/notifications';
 import Loader from 'components/Loader';
 import BadRequest from 'components/BadRequest';
 
-import {
-  ListActors,
-  Actor,
-  Poster,
-  Image,
-  Title,
-} from './Cast.styled';
+import { ListActors, Actor, Poster, Image, Title } from './Cast.styled';
 
 import defaultImage from 'images/no-photo.jpg';
 
@@ -76,9 +70,7 @@ function Cast() {
         </ListActors>
       )}
       {actors?.length === 0 && (
-        <BadRequest
-          error={error ?? 'We have no information about the cast.'}
-        />
+        <BadRequest error={error ?? 'We have no information about the cast.'} />
       )}
     </>
   );
