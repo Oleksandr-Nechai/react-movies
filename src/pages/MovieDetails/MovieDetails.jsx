@@ -3,18 +3,16 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { getMovies } from 'services/api';
-import {
-  showLoading,
-  loadingRemove,
-  validationRequest,
-} from 'services/notifications';
+import { validationRequest } from 'services/notifications';
 
 import Film from 'components/Film';
+import Loader from 'components/Loader';
 import BadRequest from 'components/BadRequest';
 
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
-  const [error, setError] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [error, setError] = useState(null);
   const { slug } = useParams();
   const movieId = slug.match(/[a-zA-Z0-9]+$/)[0];
 
@@ -23,7 +21,7 @@ function MovieDetails() {
 
     async function fetchData() {
       try {
-        showLoading();
+        setVisible(true);
         const movieInfo = await getMovies({
           action: 'movieDetails',
           movieId,
@@ -39,7 +37,7 @@ function MovieDetails() {
         validationRequest(e.message);
         setMovie(null);
       } finally {
-        loadingRemove();
+        setVisible(false);
       }
     }
     fetchData();
@@ -50,6 +48,7 @@ function MovieDetails() {
 
   return (
     <>
+      {visible && <Loader visible={visible} gap={'100px'} />}
       {movie && <Film movie={movie} />}
       {error && <BadRequest error={error} />}
     </>

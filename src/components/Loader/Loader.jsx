@@ -1,7 +1,7 @@
 import { ThreeDots } from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 
-function Loader({ visible, gap = '0px' }) {
+function Loader({ visible = true, gap = '0px' }) {
   return (
     <ThreeDots
       height="34"

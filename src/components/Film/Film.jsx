@@ -113,7 +113,7 @@ function Film({ movie }) {
           </li>
         </ListLink>
       </MoreInformation>
-      <Suspense fallback={<Loader gap={'100px'} />}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </Section>
