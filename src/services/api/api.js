@@ -28,12 +28,10 @@ export async function getMovies({
     params: { ...BASE_PARAMS.params, ...params },
     ...controller,
   };
-
   const { data } = await axios.get(
     `${BASE_URL}${searchEndpoint(action, movieId)}`,
     searchParams
   );
-
   return data;
 }
 

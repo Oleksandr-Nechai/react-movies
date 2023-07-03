@@ -1,0 +1,1 @@
+export { useMovieData } from './useMovieData';

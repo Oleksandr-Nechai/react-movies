@@ -1,62 +1,28 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-
-import { getMovies } from 'services/api';
-import {
-  findMovies,
-  validationRequest,
-  showLoading,
-  loadingRemove,
-} from 'services/notifications';
+import { useMovieData } from 'hooks';
 
 import MoviesList from 'components/MoviesList';
 import BadRequest from 'components/BadRequest';
 import Section from 'components/Section';
+import Loader from 'components/Loader';
 
 function Home() {
-  const [trendingMovies, setTrendingMovies] = useState(null);
-  const [error, setError] = useState(null);
+  const [movieInfo, visible, error] = useMovieData('trending');
 
-  useEffect(() => {
-    const controller = new AbortController();
-    async function fetchData() {
-      try {
-        showLoading();
-        const { results } = await getMovies({
-          action: 'trending',
-          controller: { signal: controller.signal },
-        });
-        setTrendingMovies([...results]);
-        findMovies('trending');
-      } catch (e) {
-        if (axios.isCancel(e)) {
-          return;
-        }
-        setError(e.message);
-        validationRequest(e.message);
-        setTrendingMovies([]);
-      } finally {
-        loadingRemove();
-      }
-    }
-    fetchData();
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  const results = movieInfo ? movieInfo.results : null;
+  // console.log(results);
 
   return (
     <>
-      <Section>
-        <h1>Trending movies today</h1>
-      </Section>
-      {trendingMovies?.length > 0 && (
-        <MoviesList
-          movies={trendingMovies}
-          name={`to the trending page`}
-        />
+      {!visible && (results || error) && (
+        <Section>
+          <h1>Trending movies today</h1>
+        </Section>
       )}
-      {trendingMovies?.length === 0 && <BadRequest error={error} />}
+      {visible && <Loader visible={visible} gap={'100px'} />}
+      {results?.length > 0 && (
+        <MoviesList movies={results} name={`to the trending page`} />
+      )}
+      {error && <BadRequest error={error} />}
     </>
   );
 }

@@ -1,55 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-
-import { getMovies } from 'services/api';
-import { validationRequest } from 'services/notifications';
+import { useMovieData } from 'hooks';
 
 import Film from 'components/Film';
 import Loader from 'components/Loader';
 import BadRequest from 'components/BadRequest';
 
 function MovieDetails() {
-  const [movie, setMovie] = useState(null);
-  const [visible, setVisible] = useState(false);
-  const [error, setError] = useState(null);
-  const { slug } = useParams();
-  const movieId = slug.match(/[a-zA-Z0-9]+$/)[0];
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    async function fetchData() {
-      try {
-        setVisible(true);
-        const movieInfo = await getMovies({
-          action: 'movieDetails',
-          movieId,
-          controller: { signal: controller.signal },
-        });
-
-        setMovie({ ...movieInfo });
-      } catch (e) {
-        if (axios.isCancel(e)) {
-          return;
-        }
-        setError(e.message);
-        validationRequest(e.message);
-        setMovie(null);
-      } finally {
-        setVisible(false);
-      }
-    }
-    fetchData();
-    return () => {
-      controller.abort();
-    };
-  }, [movieId]);
+  const [movieInfo, visible, error] = useMovieData('movieDetails');
 
   return (
     <>
       {visible && <Loader visible={visible} gap={'100px'} />}
-      {movie && <Film movie={movie} />}
+      {movieInfo && <Film movie={movieInfo} />}
       {error && <BadRequest error={error} />}
     </>
   );
