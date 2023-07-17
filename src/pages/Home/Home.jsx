@@ -9,7 +9,6 @@ function Home() {
   const [movieInfo, visible, error] = useMovieData('trending');
 
   const results = movieInfo ? movieInfo.results : null;
-  // console.log(results);
 
   return (
     <>

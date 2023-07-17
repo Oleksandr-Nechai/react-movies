@@ -1,23 +1,52 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+
+import BadRequest from 'components/BadRequest';
+
+import { validationRequest } from 'services/notifications';
 
 class ErrorBoundary extends Component {
   state = {
     hasError: false,
+    error: 'Network Error',
   };
 
-  componentDidCatch(error, errorInfo) {
-    this.setState({ hasError: true });
-    console.error(error, errorInfo);
+  static getDerivedStateFromError(error) {
+    console.dir(error);
+    return { hasError: true };
   }
 
+  componentDidCatch() {
+    console.log('11');
+    validationRequest(this.state.error);
+  }
+
+  ddd = () => {
+    this.setState({ hasError: false });
+
+    // window.location.reload();
+  };
+
   render() {
-    if (this.state.hasError) {
-      console.log(2222);
-      return <h1>Что-то пошло не так.</h1>;
-    }
+    const { hasError, error } = this.state;
     const { children } = this.props;
-    return <>{children}</>;
+
+    return (
+      <>
+        {hasError ? (
+          <>
+            <BadRequest error={error} />
+
+            <NavLink to="/" onClick={this.ddd}>
+              Home
+            </NavLink>
+          </>
+        ) : (
+          <>{children}</>
+        )}
+      </>
+    );
   }
 }
 
