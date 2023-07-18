@@ -9,12 +9,12 @@ import { validationRequest } from 'services/notifications';
 class ErrorBoundary extends Component {
   state = {
     hasError: false,
-    error: 'Network Error',
+    error: '',
   };
 
-  static getDerivedStateFromError(error) {
-    console.dir(error);
-    return { hasError: true };
+  static getDerivedStateFromError() {
+    console.log('22');
+    return { hasError: true, error: 'Loading page failed' };
   }
 
   componentDidCatch() {
@@ -23,9 +23,7 @@ class ErrorBoundary extends Component {
   }
 
   ddd = () => {
-    this.setState({ hasError: false });
-
-    // window.location.reload();
+    this.setState({ hasError: false, error: '' });
   };
 
   render() {

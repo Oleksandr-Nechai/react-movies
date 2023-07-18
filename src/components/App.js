@@ -2,8 +2,9 @@ import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import SharedLayout from 'components/SharedLayout';
+import Home from 'pages/Home';
 
-const Home = lazy(() => import('../pages/Home' /* webpackChunkName: "Home" */));
+// const Home = lazy(() => import('../pages/Home' /* webpackChunkName: "Home" */));
 const Movies = lazy(() =>
   import('../pages/Movies' /* webpackChunkName: "Movies" */)
 );
