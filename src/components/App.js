@@ -8,9 +8,9 @@ import Home from 'pages/Home';
 const Movies = lazy(() =>
   import('../pages/Movies' /* webpackChunkName: "Movies" */)
 );
-const MovieDetails = lazy(() =>
-  import('../pages/MovieDetails' /* webpackChunkName: "MovieDetails" */)
-);
+// const MovieDetails = lazy(() =>
+//   import('../pages/MovieDetails' /* webpackChunkName: "MovieDetails" */)
+// );
 const NotFound = lazy(() =>
   import('../pages/NotFound' /* webpackChunkName: "NotFound" */)
 );
