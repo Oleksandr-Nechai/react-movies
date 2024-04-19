@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 
+import Section from 'components/Section';
 import BadRequest from 'components/BadRequest';
 
 import { validationRequest } from 'services/notifications';
@@ -9,21 +9,19 @@ import { validationRequest } from 'services/notifications';
 class ErrorBoundary extends Component {
   state = {
     hasError: false,
-    error: '',
+    error: 'Loading page failed',
   };
 
   static getDerivedStateFromError() {
-    console.log('22');
-    return { hasError: true, error: 'Loading page failed' };
+    return { hasError: true };
   }
 
   componentDidCatch() {
-    console.log('11');
     validationRequest(this.state.error);
   }
 
-  ddd = () => {
-    this.setState({ hasError: false, error: '' });
+  handleButtonClick = () => {
+    window.location.reload();
   };
 
   render() {
@@ -33,13 +31,13 @@ class ErrorBoundary extends Component {
     return (
       <>
         {hasError ? (
-          <>
+          <Section>
             <BadRequest error={error} />
 
-            <NavLink to="/" onClick={this.ddd}>
-              Home
-            </NavLink>
-          </>
+            <button type="button" onClick={this.handleButtonClick}>
+              Try refreshing the page
+            </button>
+          </Section>
         ) : (
           <>{children}</>
         )}
