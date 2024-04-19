@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.js": "/react-movies/static/js/main.2785ca98.js",
-    "Home.js": "/react-movies/static/js/Home.39a95ca3.chunk.js",
-    "Movies.js": "/react-movies/static/js/Movies.53c04d2f.chunk.js",
-    "MovieDetails.js": "/react-movies/static/js/MovieDetails.118f08db.chunk.js",
+    "main.js": "/react-movies/static/js/main.b7eec1d8.js",
+    "Home.js": "/react-movies/static/js/Home.3cd2e36e.chunk.js",
+    "Movies.js": "/react-movies/static/js/Movies.df1ee034.chunk.js",
+    "MovieDetails.js": "/react-movies/static/js/MovieDetails.e5627636.chunk.js",
     "NotFound.js": "/react-movies/static/js/NotFound.7a0d9fa2.chunk.js",
     "Cast.js": "/react-movies/static/js/Cast.99510ab7.chunk.js",
     "Reviews.js": "/react-movies/static/js/Reviews.8c4ae2e8.chunk.js",
@@ -11,10 +11,10 @@
     "static/js/724.abd8b5f6.chunk.js": "/react-movies/static/js/724.abd8b5f6.chunk.js",
     "static/media/page-not-found-wallpapers.jpg": "/react-movies/static/media/page-not-found-wallpapers.a65150f4238d916f56ca.jpg",
     "index.html": "/react-movies/index.html",
-    "main.2785ca98.js.map": "/react-movies/static/js/main.2785ca98.js.map",
-    "Home.39a95ca3.chunk.js.map": "/react-movies/static/js/Home.39a95ca3.chunk.js.map",
-    "Movies.53c04d2f.chunk.js.map": "/react-movies/static/js/Movies.53c04d2f.chunk.js.map",
-    "MovieDetails.118f08db.chunk.js.map": "/react-movies/static/js/MovieDetails.118f08db.chunk.js.map",
+    "main.b7eec1d8.js.map": "/react-movies/static/js/main.b7eec1d8.js.map",
+    "Home.3cd2e36e.chunk.js.map": "/react-movies/static/js/Home.3cd2e36e.chunk.js.map",
+    "Movies.df1ee034.chunk.js.map": "/react-movies/static/js/Movies.df1ee034.chunk.js.map",
+    "MovieDetails.e5627636.chunk.js.map": "/react-movies/static/js/MovieDetails.e5627636.chunk.js.map",
     "NotFound.7a0d9fa2.chunk.js.map": "/react-movies/static/js/NotFound.7a0d9fa2.chunk.js.map",
     "Cast.99510ab7.chunk.js.map": "/react-movies/static/js/Cast.99510ab7.chunk.js.map",
     "Reviews.8c4ae2e8.chunk.js.map": "/react-movies/static/js/Reviews.8c4ae2e8.chunk.js.map",
@@ -22,6 +22,6 @@
     "724.abd8b5f6.chunk.js.map": "/react-movies/static/js/724.abd8b5f6.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.2785ca98.js"
+    "static/js/main.b7eec1d8.js"
   ]
 }
